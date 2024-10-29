@@ -9,7 +9,6 @@
 | 4 | Shammi More, Georgios Antonopoulos, Felix Hoffstaedter, Julian Caspers, Simon B. Eickhoff, Kaustubh R. Patil | Brain-age prediction: A systematic comparison of machine learning workflows | medicina/predictia varstei | tehnologii de achiziție a datelor neuroimagistice, Algoritmi de machine learning, PCA | Pentru comparația cu modelul brainageR, s-a folosit un alt set de preprocesare bazat pe SPM12, care oferă segmentări similare. În vederea reducerii dimensionalității și pentru a obține reprezentări relevante din datele de neuroimagistică, s-au folosit două strategii principale: Voxel-wise GMV si Parcel-based GMV. Evaluarea Performanței | acuratețe ridicată, cu o eroare medie absolută (MAE) între 3,9 și 4,8 ani | Limitările algoritmilor, Evaluarea limitată a tehnologiilor de deep learning, Dimensionalitatea ridicată a datelor neuroimagistice | |
 | 5 | Xin Now Fengging Zhang John Kaunas Hualou Liang | Improved prediction of brai'n age using multimodal neuroimaging data | Medicina/Predicția Varstei | Statistical analysis Machine learning methods The rationale of brain age prediction | R2 = .774, MAE = 1.384 | Corelația slabă între vârsta cronologică și vârsta creierului, Calitatea diferita a imaginilor | |
 
-
 ## Arhitectura
 ![Diagrama](documente/Diagrama.png)
 
