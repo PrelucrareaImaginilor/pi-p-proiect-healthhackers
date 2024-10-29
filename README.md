@@ -11,5 +11,6 @@
 
 
 ## Arhitectura
+![Diagrama](documente/Diagrama.png)
 
 ## Descriere
