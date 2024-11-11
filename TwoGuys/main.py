@@ -6,8 +6,14 @@ def main():
     meta_path = "../data/metadata/training_metadata.csv"
     file = "sub-NDARAA306NT2_ses-HBNsiteRU_task-rest_run-2_atlas-Schaefer2018p200n17_space-MNI152NLin6ASym_reg-36Parameter_desc-PearsonNilearn_correlations.tsv"
     metadata = pd.read_csv(meta_path)
-    format(file, metadata)
+   # format(file, metadata)
+    dir_path="../data/train_tsv"
+    list_files=[]
+    for file in os.listdir(dir_path):
+        if file.endswith(".tsv"):
+            list_files.append(file)
 
+    print(len(list_files))
 
 def format(file, metadata):
     dir_path = "../data/"
