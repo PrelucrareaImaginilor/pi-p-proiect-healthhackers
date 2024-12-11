@@ -3,13 +3,21 @@ import os
 import numpy as np
 from func import *
 
+debug = False
+
 def main():
 
     metadata = read_metadata("../data/metadata/training_metadata.csv")
-    show_statistics(metadata)
+    if debug: show_statistics(metadata)
 
     metadata = fill_metadata(metadata)
-    show_statistics(metadata)
+    if debug: show_statistics(metadata)
+
+    if debug: print(metadata)
+    mapping_data(metadata)
+
+    if debug: print(metadata)
+
 
     write_metadata("../valid_metadata/training_metadata_valid.csv", metadata)
 
@@ -20,10 +28,12 @@ def main():
             list_files.append(file)
 
 
-    if 0:
+    if 1:
         for (index, file) in enumerate(list_files):
             print(f"{index}/{len(list_files)}: {file}")
-            data = format(file, metadata)
+            data, y = format(file, metadata)
+            if index > 10:
+                break
 
 
 

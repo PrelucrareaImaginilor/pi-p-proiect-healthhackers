@@ -64,6 +64,10 @@ def format(file, metadata):
     pattern = r'(?<=-)[^_]+'
     ID = re.search(pattern, file).group()
     data = metadata.loc[ID]
+    if 'age' in data.index:
+        y = data.pop('age')
+    else:
+        y = None
 
     upper_indices = np.triu_indices(mri.shape[0], k=1)
     upper_data = mri.values[upper_indices]
@@ -71,7 +75,7 @@ def format(file, metadata):
     mri_data = pd.Series(upper_data)
     data = pd.concat([data, mri_data])
 
-    return data
+    return data, y
 
 
 def show_statistics(metadata: pd.DataFrame, hist=False):
@@ -92,5 +96,8 @@ def show_statistics(metadata: pd.DataFrame, hist=False):
             plt.show()
 
 
+def mapping_data(metadata: pd.DataFrame):
+    for col in metadata.select_dtypes(include=['object', 'string']).columns:
+        metadata[col] = pd.Categorical(metadata[col]).codes + 1
 
 
