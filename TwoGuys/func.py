@@ -6,12 +6,14 @@ import matplotlib.pyplot as plt
 
 def read_metadata(meta_path):
     metadata = pd.read_csv(meta_path)
+    print("(System): file loaded")
     metadata.set_index('participant_id', inplace=True)
     return metadata
 
 
 def write_metadata(meta_path, metadata: pd.DataFrame):
     metadata.to_csv(meta_path)
+    print("(System): file saved")
 
 
 def fill_metadata(metadata: pd.DataFrame):
@@ -75,7 +77,7 @@ def format(file, metadata):
     mri_data = pd.Series(upper_data)
     data = pd.concat([data, mri_data])
 
-    return data, y
+    return [data.values.tolist()], [float(y)], ID
 
 
 def show_statistics(metadata: pd.DataFrame, hist=False):
@@ -97,7 +99,12 @@ def show_statistics(metadata: pd.DataFrame, hist=False):
 
 
 def mapping_data(metadata: pd.DataFrame):
+    mappings = {}
     for col in metadata.select_dtypes(include=['object', 'string']).columns:
-        metadata[col] = pd.Categorical(metadata[col]).codes + 1
+        metadata[col], categories = pd.factorize(metadata[col])
+        #print(dict(zip(range(len(categories)), categories)))
+        mappings[col] = dict(zip(range(len(categories)), categories))
+
+    return mappings
 
 
