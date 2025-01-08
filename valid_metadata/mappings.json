@@ -1,0 +1,39 @@
+{
+    "sex": {
+        "0": "Female",
+        "1": "Male"
+    },
+    "study_site": {
+        "0": "HBNsiteCBIC",
+        "1": "HBNsiteRU",
+        "2": "HBNsiteSI",
+        "3": "HBNsiteCUNY"
+    },
+    "ethnicity": {
+        "0": "Not_Hispanic_or_Latino",
+        "1": "Hispanic_or_Latino"
+    },
+    "race": {
+        "0": "White",
+        "1": "Other",
+        "2": "Black",
+        "3": "Asian"
+    },
+    "handedness": {
+        "0": "Right",
+        "1": "Left",
+        "2": "Ambidextrous"
+    },
+    "parent_1_education": {
+        "0": "Complete_tertiary",
+        "1": "Complete_primary",
+        "2": "Complete_secondary",
+        "3": "No_incomplete primary"
+    },
+    "parent_2_education": {
+        "0": "Complete_tertiary",
+        "1": "Complete_secondary",
+        "2": "No_incomplete primary",
+        "3": "Complete_primary"
+    }
+}
