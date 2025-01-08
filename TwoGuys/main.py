@@ -5,7 +5,8 @@ import os
 import numpy as np
 from func import *
 from sklearn.linear_model import SGDRegressor
-from sklearn.neural_network import MLPRegressor
+from sklearn.ensemble import RandomForestRegressor, HistGradientBoostingRegressor
+from sklearn.linear_model import Ridge
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error
 import joblib
@@ -39,9 +40,8 @@ def main():
         if file.endswith(".tsv"):
             list_files.append(file)
 
-    model = SGDRegressor(penalty='l1', warm_start=True)
-    #model = MLPRegressor(hidden_layer_sizes=(10,3))
-    modelR = SGDRegressor(warm_start=True)
+    model = SGDRegressor(penalty='l1', verbose=1, warm_start=True, tol=0.0001, random_state=10)
+    modelR = HistGradientBoostingRegressor(max_iter=100, learning_rate=0.1, max_depth=10, random_state=21, verbose=1)
     data_all = []
     data_all_test = []
     data_id = []
@@ -80,18 +80,18 @@ def main():
     err_brain = mean_squared_error(y_test, y_predict_brain)
     print('Brain - err=', err_brain)
 
-    while train_no == 1 or err > 3:
+    while train_no == 1 or err > 5:
         print(f"Training no.{train_no}:")
         train_no += 1
 
-        while err_brain > 4.4:
-            data_aux = [lista[-19900:] for lista in data_all]
-            model.partial_fit(data_aux, y_all)
-            data_aux = [lista[-19900:] for lista in data_all_test]
-            y_brain = model.predict(data_aux)
-            y_predict_brain = y_brain * 17.0 + 5
-            err_brain = mean_squared_error(y_test, y_predict_brain)
-            print('Brain - err=', err_brain)
+        #while err_brain > 4.4:
+        #    data_aux = [lista[-19900:] for lista in data_all]
+        #    model.fit(data_aux, y_all)
+        #    data_aux = [lista[-19900:] for lista in data_all_test]
+        #    y_brain = model.predict(data_aux)
+        #    y_predict_brain = y_brain * 17.0 + 5
+        #    err_brain = mean_squared_error(y_test, y_predict_brain)
+        #    print('Brain - err=', err_brain)
 
         data_aux = [lista[-19900:] for lista in data_all]
         y_brain_tr = model.predict(data_aux)
