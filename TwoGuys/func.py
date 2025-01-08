@@ -12,7 +12,7 @@ def read_metadata(meta_path):
 
 
 def write_metadata(meta_path, metadata: pd.DataFrame):
-    metadata.to_csv(meta_path)
+    metadata.to_csv(meta_path, index=False)
     print("(System): file saved")
 
 
@@ -59,17 +59,17 @@ def fill_metadata(metadata: pd.DataFrame):
     return metadata
 
 
-def format(file, metadata):
+def format_file(file, metadata, dir="train_tsv/"):
     dir_path = "../data/"
 
-    mri = pd.read_csv(dir_path + "train_tsv/" + file, sep='\t', header=None)
+    mri = pd.read_csv(dir_path + dir + file, sep='\t', header=None)
     pattern = r'(?<=-)[^_]+'
     ID = re.search(pattern, file).group()
     data = metadata.loc[ID]
     if 'age' in data.index:
         y = data.pop('age')
     else:
-        y = None
+        y = 0
 
     upper_indices = np.triu_indices(mri.shape[0], k=1)
     upper_data = mri.values[upper_indices]
@@ -104,6 +104,12 @@ def mapping_data(metadata: pd.DataFrame):
         metadata[col], categories = pd.factorize(metadata[col])
         #print(dict(zip(range(len(categories)), categories)))
         mappings[col] = dict(zip(range(len(categories)), categories))
+
+    for col in metadata.columns:
+        if col == 'age':
+            metadata[col] = (metadata[col] - 5.0) / 17.0
+        else:
+            metadata[col] = (metadata[col] - metadata[col].min()) / (metadata[col].max() - metadata[col].min())
 
     return mappings
 
